@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mobil;
+use App\Models\Pengembalian;
+use App\Models\Sewa;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -12,9 +14,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $mobils = Mobil::latest()->get();
-        // $sewam = $mobils->sewa;
-        // @dd($sewam);
+        $mobils = Mobil::all();
         return view('admin.dashboard', compact('mobils'));
     }
 
@@ -50,17 +50,28 @@ class AdminController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function penyewaan()
     {
-        //
+        $sewas = Sewa::join('mobils', 'sewas.id_mobil', '=', 'mobils.id')
+            ->select('sewas.*', 'mobils.*')
+            ->join('users', 'sewas.id_user', '=', 'users.id')
+            ->select('sewas.*', 'users.*')
+            ->where('status', 'disewa')
+            ->get();
+
+        return view('admin.penyewaan', compact('sewas'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function pengembalian()
     {
-        //
+        $pengembalian = Pengembalian::join('sewas', 'pengembalians.id_sewa', '=', 'sewas.id')
+            ->select('pengembalians.*', 'sewas.*')
+            ->get();
+
+        return view('admin.pengembalian', compact('pengembalian'));
     }
 
     /**

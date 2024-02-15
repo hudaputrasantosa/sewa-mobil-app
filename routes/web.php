@@ -36,6 +36,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard', 'index')->name('admin.dashboard');
         Route::get('/mobil/tambah', 'tambahMobil')->name('admin.tambahMobil');
         Route::post('/mobil/store', 'kirimDataMobil')->name('admin.kirimDataMobil');
+        Route::get('/penyewaan', 'penyewaan')->name('admin.penyewaan');
+        Route::get('/pengembalian', 'pengembalian')->name('admin.pengembalian');
     });
 
     Route::prefix('user')->middleware('checkRole:user', 'verified')->controller(UserController::class)->group(function () {

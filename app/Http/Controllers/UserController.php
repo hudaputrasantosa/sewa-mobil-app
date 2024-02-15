@@ -85,9 +85,9 @@ class UserController extends Controller
 
 
         if (count($checkPlat) >= 1) {
-            @dd($checkPlat->update(['status' => 'tersedia']));
+            @dd($checkPlat[1]->status);
             $checkPlat->update(['status' => 'tersedia']);
-            Pengembalian::created(['id_sewa' => $checkPlat->id]);
+            Pengembalian::created(['id_sewa' => $checkPlat[1]->id]);
             return redirect()->back();
         } else {
             return redirect()->back();
