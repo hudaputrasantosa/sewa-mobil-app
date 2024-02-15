@@ -39,5 +39,32 @@ class DatabaseSeeder extends Seeder
                 'password' => Hash::make('huda123')
             ]
         ]);
+
+        DB::table('mobils')->insert([
+            [
+                'id' => Str::uuid(),
+                'merek' => 'Avanza',
+                'model' => 'xyz2009',
+                'plat' => 'G 25637 KH',
+                'tarif_sewa' => 100000,
+                'status' => 'tersedia',
+            ],
+            [
+                'id' => Str::uuid(),
+                'merek' => 'Xenia',
+                'model' => 'abc2019',
+                'plat' => 'G 24537 HC',
+                'tarif_sewa' => 200000,
+                'status' => 'tersedia',
+            ],
+            [
+                'id' => Str::uuid(),
+                'merek' => 'Kijang',
+                'model' => 'cc2002',
+                'plat' => 'H 24337 GC',
+                'tarif_sewa' => 100000,
+                'status' => 'tersedia',
+            ],
+        ]);
     }
 }

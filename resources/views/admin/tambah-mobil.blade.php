@@ -1,16 +1,10 @@
 <x-app-layout>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <h2>Masukkan data Mobil</h2>
-
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-6 mt-8 bg-white">
+        <a href="{{ route('admin.dashboard') }}" class="text-blue-500"><- Kembali</a>
+                <div class="my-4 text-center">
+                    <h4 class="font-bold text-gray-900 text-xl">Masukkan Data Mobil</h4>
                 </div>
-
-
-
-                <form class="max-w-sm mx-auto" method="POST" action="{{ route('admin.kirimDataMobil') }}">
+                <form class="max-w-lg mx-auto" method="POST" action="{{ route('admin.kirimDataMobil') }}">
                     @csrf
                     <div class="mb-5">
                         <label for="merek"
@@ -41,12 +35,10 @@
                             placeholder="Masukkan data.." required />
                     </div>
 
-
-                    <button type="submit"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                    <div class="w-full justify-center text-center">
+                        <button type="submit"
+                            class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-sm sm:w-auto px-8 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                    </div>
                 </form>
-
-            </div>
-        </div>
     </div>
 </x-app-layout>

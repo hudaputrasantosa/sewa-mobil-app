@@ -23,7 +23,7 @@ class AdminController extends Controller
      */
     public function tambahMobil()
     {
-        return view('admin.tambahMobil');
+        return view('admin.tambah-mobil');
     }
 
     /**
@@ -37,6 +37,7 @@ class AdminController extends Controller
             'model' => 'required',
             'plat' => 'required',
             'tarif_sewa' => 'required', 'numeric',
+            'status' => 'tersedia',
         ]);
 
         $mobil = new Mobil();

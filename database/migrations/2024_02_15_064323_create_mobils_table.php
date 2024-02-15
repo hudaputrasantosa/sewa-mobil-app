@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('model');
             $table->string('plat');
             $table->integer('tarif_sewa');
+            $table->string('status');
             $table->timestamps();
         });
     }
