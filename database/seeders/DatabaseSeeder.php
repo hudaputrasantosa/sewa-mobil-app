@@ -37,6 +37,16 @@ class DatabaseSeeder extends Seeder
                 'role' => 'user',
                 'email' => 'huda@gmail.com',
                 'password' => Hash::make('huda123')
+            ],
+            [
+                'id' => Str::uuid(),
+                'nama' => 'ibnu',
+                'alamat' => 'daerah purwokerto',
+                'no_telepon' => '085166562766',
+                'no_sim' => '5643-1563',
+                'role' => 'user',
+                'email' => 'ibnu@gmail.com',
+                'password' => Hash::make('ibnu')
             ]
         ]);
 

@@ -40,7 +40,10 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('user')->middleware('checkRole:user', 'verified')->controller(UserController::class)->group(function () {
         Route::get('/homepage', 'index')->name('user.homepage');
+        Route::post('/getHargaSewa', 'getHargaSewa')->name('getHargaSewa');
         Route::post('/sewa/store', 'sewa')->name('user.sewa');
+        Route::get('/sewa/berlangsung', 'sewaBerlangsung')->name('user.sewa.berlangsung');
+        Route::post('/sewa/pengembalian', 'pengembalian')->name('user.pengembalian');
     });
 });
 

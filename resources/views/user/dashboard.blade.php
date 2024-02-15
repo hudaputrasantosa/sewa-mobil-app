@@ -1,7 +1,10 @@
 <x-app-layout>
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-6">
+        <a
+            href="{{ route('user.sewa.berlangsung') }}"class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 mb-2">Sewa
+            yang berlangsung</a>
 
-        <div class="relative overflow-x-auto">
+        <div class="mt-6 relative overflow-x-auto">
             <table class="w-full text-sm text-center justify-center items-center text-gray-500 dark:text-gray-400">
                 <thead class="text-sm text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
@@ -43,7 +46,7 @@
                                 {{ $mobil->tarif_sewa }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $mobil->tarif_sewa }}
+                                {{ $mobil->status }}
                             </td>
                             <td class="px-6 py-4 justify-center text-center">
                                 <button data-modal-target="detail-{{ $mobil->id }}"
@@ -63,7 +66,7 @@
                                             <div
                                                 class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                                                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                                                    Form Peminjaman
+                                                    Form Sewa
                                                 </h3>
                                                 <button type="button"
                                                     class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -81,57 +84,55 @@
                                             <!-- Modal body -->
                                             <form method="POST" action="{{ route('user.sewa') }}" class="p-4 md:p-5">
                                                 @csrf
-                                                <div class="grid gap-4 mb-4 grid-cols-2">
+                                                <div class="grid gap-4 mb-4 grid-cols-1 justify-center items-center">
 
-                                                    <div class="col-span-2 sm:col-span-1">
 
-                                                        <div class="relative max-w-sm">
-                                                            <div
-                                                                class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400"
-                                                                    aria-hidden="true"
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    fill="currentColor" viewBox="0 0 20 20">
-                                                                    <path
-                                                                        d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                                                                </svg>
-                                                            </div>
-                                                            <input datepicker datepicker-autohide type="text"
-                                                                name="tanggal_mulai"
-                                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                                placeholder="Select date">
+                                                    <div class="relative max-w-sm">
+                                                        <div
+                                                            class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                                                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                                fill="currentColor" viewBox="0 0 20 20">
+                                                                <path
+                                                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                                                            </svg>
                                                         </div>
-
+                                                        <input id="tanggal_mulai" name="tanggal_mulai" datepicker
+                                                            datepicker-autohide type="text" autocomplete="off"
+                                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                            placeholder="Pilih tanggal mulai">
                                                     </div>
-                                                    <div class="col-span-2 sm:col-span-1">
 
-                                                        <div class="relative max-w-sm">
-                                                            <div
-                                                                class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400"
-                                                                    aria-hidden="true"
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    fill="currentColor" viewBox="0 0 20 20">
-                                                                    <path
-                                                                        d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                                                                </svg>
-                                                            </div>
-                                                            <input datepicker datepicker-autohide name="tanggal_selesai"
-                                                                type="text"
-                                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                                placeholder="Select date">
+                                                    <div class="relative max-w-sm">
+                                                        <div
+                                                            class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                                                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                                fill="currentColor" viewBox="0 0 20 20">
+                                                                <path
+                                                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                                                            </svg>
                                                         </div>
-
+                                                        <input id="tanggal_selesai" name="tanggal_selesai" datepicker
+                                                            datepicker-autohide type="text" autocomplete="off"
+                                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                            placeholder="pilih tanggal selesai">
                                                     </div>
+
+
                                                     <div class="col-span-2">
                                                         <label for="tarif_sewa"
                                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tarif
                                                             Sewa perhari</label>
-                                                        <input type="text" name="tarif_sewa"
-                                                            value="{{ $mobil->tarif_sewa }}"></h5>
+
+                                                        <input id="tarif_sewa"name="tarif_sewa" type="number"
+                                                            class="mb-5 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                            value="{{ $mobil->tarif_sewa }}" readonly>
+
                                                     </div>
 
                                                     <input type="hidden" name="id_mobil" value="{{ $mobil->id }}">
+                                                    <input type="hidden" name="status" value="{{ $mobil->status }}">
                                                 </div>
                                                 <button type="submit"
                                                     class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -141,7 +142,7 @@
                                                             d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                                                             clip-rule="evenodd"></path>
                                                     </svg>
-                                                    Ajukan Pinjaman
+                                                    Ajukan Sewa
                                                 </button>
                                             </form>
                                         </div>
@@ -160,5 +161,34 @@
     </div>
     @section('body-script')
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+
+                $('#tanggal_mulai, #tanggal_selesai').on('change', function() {
+                    let tgl_mulai = $('#tanggal_mulai').val();
+                    let tgl_selesai = $('#tanggal_selesai').val();
+                    let tarif = $('#tarif_sewa').val();
+                    console.log(tgl_mulai, tgl_selesai, tarif);
+
+                    $.ajax({
+                        url: '{{ route('getHargaSewa') }}',
+                        type: 'POST',
+                        data: {
+                            tanggal_mulai: tgl_mulai,
+                            tanggal_selesai: tgl_selesai,
+                            tarif_sewa: tarif
+                        },
+                        success: function(data) {
+                            alert(data);
+                            $('#tarif_sewa').val(data);
+                        },
+                        error: function(request, status, error) {
+                            alert(request.statusText + "[" + request.status + "]");
+                            alert(request.responseText);
+                        }
+                    });
+                });
+            })
+        </script>
     @endsection
 </x-app-layout>
