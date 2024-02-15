@@ -10,19 +10,21 @@
                     </a>
                 </div>
 
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
-                        {{ __('Pengelolaan Data Mobil') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('admin.penyewaan')" :active="request()->routeIs('admin.penyewaan')">
-                        {{ __('Penyewaan') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('admin.pengembalian')" :active="request()->routeIs('admin.pengembalian')">
-                        {{ __('Pengembalian') }}
-                    </x-nav-link>
+                @if (Auth::user()->role === 'admin')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
+                            {{ __('Pengelolaan Data Mobil') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.penyewaan')" :active="request()->routeIs('admin.penyewaan')">
+                            {{ __('Penyewaan') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.pengembalian')" :active="request()->routeIs('admin.pengembalian')">
+                            {{ __('Pengembalian') }}
+                        </x-nav-link>
 
-                </div>
+                    </div>
+                @endif
+                <!-- Navigation Links -->
             </div>
 
             <!-- Settings Dropdown -->
