@@ -1,4 +1,5 @@
-# Rental Mobil
+# Sistem Rental Mobil
+![Logo](https://raw.githubusercontent.com/hudaputrasantosa/sewa-mobil-app/main/public/assets/img/usecase.png)
 
 ## ⚡ Deskripsi
 Sewa App merupakan aplikasi yang ditawarkan bertujuan untuk memberikan solusi manajemen dan layanan untuk penyewaan rental mobil.
