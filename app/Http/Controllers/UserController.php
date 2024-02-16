@@ -72,22 +72,28 @@ class UserController extends Controller
 
     public function sewaBerlangsung()
     {
-        $sewas = Sewa::where('id_user', Auth::user()->id)->join('mobils', 'sewas.id_mobil', '=', 'mobils.id')->select('sewas.*', 'mobils.merek', 'mobils.plat', 'mobils.status')->get();
-        // @dd($sewas);
+        $sewas = Sewa::join('mobils', 'sewas.id_mobil', '=', 'mobils.id')
+            ->where('id_user', Auth::user()->id)
+            ->where('status', 'disewa')
+            ->get(['sewas.*', 'mobils.merek', 'mobils.plat', 'mobils.status']);
+
         return view('user.riwayat', compact('sewas'));
     }
 
 
     public function pengembalian(Request $request)
     {
-        $sewas = Sewa::where('id_user', Auth::user()->id)->join('mobils', 'sewas.id_mobil', '=', 'mobils.id')->select('sewas.*', 'mobils.plat', 'mobils.status')->get();
-        $checkPlat = $sewas->where('plat', $request->plat);
+        $sewa = Sewa::join('mobils', 'sewas.id_mobil', '=', 'mobils.id')
+            ->where('id_user', Auth::user()->id)
+            ->where('plat', $request->plat)
+            ->first(['sewas.*', 'mobils.plat', 'mobils.status']);
 
+        $mobil = Mobil::find($sewa->id_mobil);
 
-        if (count($checkPlat) >= 1) {
-            @dd($checkPlat[1]->status);
-            $checkPlat->update(['status' => 'tersedia']);
-            Pengembalian::created(['id_sewa' => $checkPlat[1]->id]);
+        if ($mobil) {
+            $mobil->status = 'tersedia';
+            $mobil->save();
+            Pengembalian::create(['id_sewa' => $sewa->id]);
             return redirect()->back();
         } else {
             return redirect()->back();
