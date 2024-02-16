@@ -67,10 +67,9 @@ class AdminController extends Controller
     public function pengembalian()
     {
         $pengembalians = Pengembalian::join('sewas', 'pengembalians.id_sewa', '=', 'sewas.id')
-            ->join('users', 'pengembalians.id_sewa', '=', 'users.id')
-            ->join('mobils', 'pengembalians.id_sewa', '=', 'mobils.id')
-            ->select('pengembalians.*', 'sewas.*', 'users.*', 'mobils.*')
-            ->get();
+            ->join('users', 'sewas.id_user', '=', 'users.id')
+            ->join('mobils', 'sewas.id_mobil', '=', 'mobils.id')
+            ->get(['pengembalians.*', 'sewas.*', 'users.*', 'mobils.*']);
 
         return view('admin.pengembalian', compact('pengembalians'));
     }
