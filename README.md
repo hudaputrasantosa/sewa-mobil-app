@@ -5,10 +5,17 @@
 Sewa App merupakan aplikasi yang ditawarkan bertujuan untuk memberikan solusi manajemen dan layanan untuk penyewaan rental mobil.
 
 ## ✨ Fitur
-
+### Penyewa
 - Autentikasi dan authorisasi pengguna
 - homepage pelanggan
-- dashbor admin
+- penyewaan dan pengembalian mobil
+- Logout dan setting account
+
+### Admin
+- Autentikasi dan authorisasi pengguna
+- dashbor pengelola data mobil admin
+- dashbor melihat data mobil yang disewa admin
+- Logout dan setting account
 
 ## ✅ Requirement and tools
  - PHP min 8.1
