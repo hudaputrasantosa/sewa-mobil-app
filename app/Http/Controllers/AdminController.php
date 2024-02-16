@@ -58,8 +58,6 @@ class AdminController extends Controller
             ->where('status', 'disewa')
             ->get();
 
-        // @dd($sewas);
-
         return view('admin.penyewaan', compact('sewas'));
     }
 
@@ -68,11 +66,13 @@ class AdminController extends Controller
      */
     public function pengembalian()
     {
-        $pengembalian = Pengembalian::join('sewas', 'pengembalians.id_sewa', '=', 'sewas.id')
-            ->select('pengembalians.*', 'sewas.*')
+        $pengembalians = Pengembalian::join('sewas', 'pengembalians.id_sewa', '=', 'sewas.id')
+            ->join('users', 'pengembalians.id_sewa', '=', 'users.id')
+            ->join('mobils', 'pengembalians.id_sewa', '=', 'mobils.id')
+            ->select('pengembalians.*', 'sewas.*', 'users.*', 'mobils.*')
             ->get();
 
-        return view('admin.pengembalian', compact('pengembalian'));
+        return view('admin.pengembalian', compact('pengembalians'));
     }
 
     /**

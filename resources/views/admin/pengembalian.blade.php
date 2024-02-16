@@ -33,34 +33,37 @@
                         </th>
                     </tr>
                 </thead>
+                @if (count($pengembalians) < 1)
+                    <p>Data Pengembalian Mobil Belum ada</p>
+                @endif
                 <tbody>
-                    @foreach ($sewas as $sewa)
+                    @foreach ($pengembalians as $pengembalian)
                         <tr
                             class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                             <th scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ $sewa->nama }}
+                                {{ $pengembalian->nama }}
                             </th>
                             <td class="px-6 py-4">
-                                {{ $sewa->no_sim }}
+                                {{ $pengembalian->no_sim }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $sewa->alamat }}
+                                {{ $pengembalian->alamat }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $sewa->merek }}
+                                {{ $pengembalian->merek }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $sewa->plat }}
+                                {{ $pengembalian->plat }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $sewa->tanggal_mulai }}
+                                {{ $pengembalian->tanggal_mulai }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $sewa->tanggal_selesai }}
+                                {{ $pengembalian->tanggal_selesai }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $sewa->harga_sewa }}
+                                {{ $pengembalian->harga_sewa }}
                             </td>
 
                         </tr>
