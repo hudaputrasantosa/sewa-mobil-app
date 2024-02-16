@@ -53,11 +53,12 @@ class AdminController extends Controller
     public function penyewaan()
     {
         $sewas = Sewa::join('mobils', 'sewas.id_mobil', '=', 'mobils.id')
-            ->select('sewas.*', 'mobils.*')
             ->join('users', 'sewas.id_user', '=', 'users.id')
-            ->select('sewas.*', 'users.*')
+            ->select('sewas.*', 'mobils.*', 'users.*')
             ->where('status', 'disewa')
             ->get();
+
+        // @dd($sewas);
 
         return view('admin.penyewaan', compact('sewas'));
     }

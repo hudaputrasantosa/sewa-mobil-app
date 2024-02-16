@@ -8,45 +8,63 @@
                 <thead class="text-sm text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">
-                            Merek
+                            Penyewa
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Model
+                            No SIM
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Alamat
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Merek
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Plat
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Taruf/Hari
+                            Tanggal Mulai
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Action
+                            Tanggal Selesai
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Harga Sewa
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- @foreach ($sewas as $mobil)
+                    @foreach ($sewas as $sewa)
                         <tr
                             class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                             <th scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ $mobil->merek }}
+                                {{ $sewa->nama }}
                             </th>
                             <td class="px-6 py-4">
-                                {{ $mobil->model }}
+                                {{ $sewa->no_sim }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $mobil->plat }}
+                                {{ $sewa->alamat }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $mobil->tarif_sewa }}
+                                {{ $sewa->merek }}
                             </td>
                             <td class="px-6 py-4">
-                                <a href="#"
-                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                {{ $sewa->plat }}
                             </td>
+                            <td class="px-6 py-4">
+                                {{ $sewa->tanggal_mulai }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $sewa->tanggal_selesai }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $sewa->harga_sewa }}
+                            </td>
+
                         </tr>
-                    @endforeach --}}
+                    @endforeach
                 </tbody>
         </table>
 
