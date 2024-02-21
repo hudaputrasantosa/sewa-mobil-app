@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\DataTables;
 
 class UserController extends Controller
 {
@@ -17,16 +18,33 @@ class UserController extends Controller
      */
     public function index(): View
     {
-        $mobils = Mobil::all();
-        return view('user.dashboard', compact('mobils'));
+
+        return view('user.dashboard');
     }
 
+    public function getData()
+    {
+
+        $mobils = Mobil::query();
+        // @dd($mobils);
+        return DataTables::of($mobils)
+            ->addColumn('action', function ($row) {
+                $btn = '<a href="javascript:void(0)" data-modal-target="detail-' . $row->id . '"
+                data-modal-toggle="detail-' . $row->id . '"
+                data-id="' . $row->id . '" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-1 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 lihat-detail">Ajukan sewa</a>';
+                return $btn;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+    }
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function tampilSewa(string $id_mobil)
     {
-        //
+        $mobil = Mobil::find($id_mobil);
+        // @dd($mobil);
+        return view('user.sewa', compact('mobil'));
     }
 
     /**
@@ -57,7 +75,7 @@ class UserController extends Controller
         $sewa->save();
         Mobil::where('id', $request->id_mobil)->update(['status' => 'disewa']);
 
-        return redirect()->back();
+        return redirect()->route('user.sewa.berlangsung');
     }
 
     public function getHargaSewa(Request $request)
@@ -88,14 +106,13 @@ class UserController extends Controller
             ->where('plat', $request->plat)
             ->first(['sewas.*', 'mobils.plat', 'mobils.status']);
 
-        $mobil = Mobil::find($sewa->id_mobil);
-
-        if ($mobil) {
+        if (!$sewa) {
+            return redirect()->back();
+        } else {
+            $mobil = Mobil::find($sewa->id_mobil);
             $mobil->status = 'tersedia';
             $mobil->save();
             Pengembalian::create(['id_sewa' => $sewa->id]);
-            return redirect()->back();
-        } else {
             return redirect()->back();
         }
     }

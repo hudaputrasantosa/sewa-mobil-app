@@ -23,6 +23,12 @@
                         </x-nav-link>
 
                     </div>
+                @else
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('user.sewa.berlangsung')" :active="request()->routeIs('user.sewa.berlangsung')">
+                            {{ __('Sewa Berlangsung') }}
+                        </x-nav-link>
+                    </div>
                 @endif
                 <!-- Navigation Links -->
             </div>

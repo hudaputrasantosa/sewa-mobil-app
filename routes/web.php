@@ -42,9 +42,11 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('user')->middleware('checkRole:user', 'verified')->controller(UserController::class)->group(function () {
         Route::get('/homepage', 'index')->name('user.homepage');
+        Route::get('/getData', 'getData')->name('getData');
         Route::post('/getHargaSewa', 'getHargaSewa')->name('getHargaSewa');
+        Route::get('/sewa/{id_mobil}', 'tampilSewa')->name('user.tampil.sewa');
         Route::post('/sewa/store', 'sewa')->name('user.sewa');
-        Route::get('/sewa/berlangsung', 'sewaBerlangsung')->name('user.sewa.berlangsung');
+        Route::get('/sewa/data/berlangsung', 'sewaBerlangsung')->name('user.sewa.berlangsung');
         Route::post('/sewa/pengembalian', 'pengembalian')->name('user.pengembalian');
     });
 });
