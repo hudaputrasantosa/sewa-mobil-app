@@ -2,12 +2,13 @@
 ![Logo](https://raw.githubusercontent.com/hudaputrasantosa/sewa-mobil-app/main/public/assets/img/usecase.png)
 
 ## ⚡ Deskripsi
-Sewa App merupakan aplikasi yang ditawarkan bertujuan untuk memberikan solusi manajemen dan layanan untuk penyewaan rental mobil.
+Sewa App merupakan aplikasi yang ditawarkan dengan tujuan untuk memberikan solusi manajemen dan layanan untuk penyewaan rental mobil.
 
 ## ✨ Fitur
 ### Penyewa
 - Autentikasi dan authorisasi pengguna
 - homepage pelanggan
+- pencarian data mobil
 - penyewaan dan pengembalian mobil
 - Logout dan setting account
 
@@ -21,6 +22,10 @@ Sewa App merupakan aplikasi yang ditawarkan bertujuan untuk memberikan solusi ma
  - PHP min 8.1
  - MariaDB/MySQL
  - Laravel 10
+ - Tailwind
+ - Datatables
+ - Jquery
+ - Exalidraw
 
 ## 🔥 Install & running local dev
 Clone Repository
