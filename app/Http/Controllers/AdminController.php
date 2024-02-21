@@ -36,12 +36,15 @@ class AdminController extends Controller
             'merek' => 'required',
             'model' => 'required',
             'plat' => 'required',
-            'tarif_sewa' => 'required', 'numeric',
-            'status' => 'tersedia',
+            'tarif_sewa' => 'required|numeric|between:0,9999999999.99',
         ]);
-
+        $validated['tarif_sewa'] = preg_replace("/[.,]/", "", $validated['tarif_sewa']);
         $mobil = new Mobil();
-        $mobil->fill($validated);
+
+        $mobil->status = "tersedia";
+        $mobil->fill(
+            $validated
+        );
         $mobil->save();
 
         return redirect()->route('admin.dashboard');

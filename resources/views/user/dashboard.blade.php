@@ -1,4 +1,6 @@
-<x-app-layout>
+@extends('layouts.app')
+
+@section('content')
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-6">
         <a
             href="{{ route('user.sewa.berlangsung') }}"class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 mb-2">Sewa
@@ -43,7 +45,7 @@
                                 {{ $mobil->plat }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $mobil->tarif_sewa }}
+                                @currency($mobil->tarif_sewa)
                             </td>
                             <td class="px-6 py-4">
                                 {{ $mobil->status }}
@@ -136,8 +138,8 @@
                                                 </div>
                                                 <button type="submit"
                                                     class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                                    <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor"
-                                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                    <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                                        xmlns="http://www.w3.org/2000/svg">
                                                         <path fill-rule="evenodd"
                                                             d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                                                             clip-rule="evenodd"></path>
@@ -159,36 +161,38 @@
         </div>
 
     </div>
-    @section('body-script')
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function() {
+@endsection
 
-                $('#tanggal_mulai, #tanggal_selesai').on('change', function() {
-                    let tgl_mulai = $('#tanggal_mulai').val();
-                    let tgl_selesai = $('#tanggal_selesai').val();
-                    let tarif = $('#tarif_sewa').val();
-                    console.log(tgl_mulai, tgl_selesai, tarif);
+@section('body-script')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
 
-                    $.ajax({
-                        url: '{{ route('getHargaSewa') }}',
-                        type: 'POST',
-                        data: {
-                            tanggal_mulai: tgl_mulai,
-                            tanggal_selesai: tgl_selesai,
-                            tarif_sewa: tarif
-                        },
-                        success: function(data) {
-                            alert(data);
-                            $('#tarif_sewa').val(data);
-                        },
-                        error: function(request, status, error) {
-                            alert(request.statusText + "[" + request.status + "]");
-                            alert(request.responseText);
-                        }
-                    });
+            $('#tanggal_mulai, #tanggal_selesai').on('input', function() {
+                let tgl_mulai = $('#tanggal_mulai').val();
+                let tgl_selesai = $('#tanggal_selesai').val();
+                let tarif = $('#tarif_sewa').val();
+                console.log(tgl_mulai, tgl_selesai, tarif);
+
+                $.ajax({
+                    url: '{{ route('getHargaSewa') }}',
+                    type: 'POST',
+                    data: {
+                        tanggal_mulai: tgl_mulai,
+                        tanggal_selesai: tgl_selesai,
+                        tarif_sewa: tarif
+                    },
+                    success: function(data) {
+                        alert(data);
+                        $('#tarif_sewa').val(data);
+                    },
+                    error: function(request, status, error) {
+                        alert(request.statusText + "[" + request.status + "]");
+                        alert(request.responseText);
+                    }
                 });
-            })
-        </script>
-    @endsection
-</x-app-layout>
+            });
+
+        })
+    </script>
+@endsection

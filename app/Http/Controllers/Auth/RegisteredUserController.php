@@ -30,15 +30,18 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-        $validated =  $request->validate([
-            'nama' => ['required', 'string', 'max:255'],
-            'alamat' => ['required'],
-            'no_telepon' => ['required', 'max:20'],
-            'no_sim' => ['required', 'max:20'],
-            'role' => ['required'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
-            'password' => ['required', Rules\Password::defaults()],
-        ]);
+        $validated =  $request->validate(
+            [
+                'nama' => ['required', 'string', 'max:255'],
+                'alamat' => ['required'],
+                'no_telepon' => ['required', 'numeric'],
+                'no_sim' => ['required', 'max:20'],
+                'role' => ['required'],
+                'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+                'password' => ['required', Rules\Password::defaults()],
+            ],
+            // ['nama.required' => 'Nama Harus Di isi  '],
+        );
         $user = new User();
         $user->fill($validated);
         $user->save();

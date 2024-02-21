@@ -1,5 +1,6 @@
-<x-app-layout>
+@extends('layouts.app')
 
+@section('content')
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-6">
 
         <a
@@ -20,7 +21,7 @@
                             Plat
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Taruf/Hari
+                            Tarif/Hari
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Status
@@ -45,7 +46,7 @@
                                 {{ $mobil->plat }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $mobil->tarif_sewa }}
+                                @currency($mobil->tarif_sewa)
                             </td>
                             <td class="px-6 py-4">
                                 {{ $mobil->status }}
@@ -60,5 +61,4 @@
         </table>
 
     </div>
-
-</x-app-layout>
+@endsection
