@@ -2,22 +2,36 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Str;
 
 class Sewa extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUuids;
+
+    // protected $keyType = 'string';
+    // public $incrementing = false;
 
     protected $primaryKey = 'id';
     protected $fillable = [
-        'id_user',
+        'users_id',
+        'mobils_id',
         'tanggal_mulai',
         'tanggal_selesai',
-        'id_mobil',
         'harga_sewa',
     ];
+
+    // protected static function boot()
+    // {
+    //     parent::boot();
+    //     static::creating(function ($model) {
+    //         $model->id = Str::uuid();
+    //     });
+    // }
 
     protected static function boot()
     {
@@ -39,8 +53,12 @@ class Sewa extends Model
         return 'string';
     }
 
-    public function mobil()
+    public function mobil(): BelongsTo
     {
-        return $this->hasOne(Mobil::class);
+        return $this->belongsTo(Mobil::class, 'mobils_id');
+    }
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'users_id');
     }
 }

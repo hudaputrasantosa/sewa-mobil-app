@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Str;
 
 class Mobil extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUuids;
 
     protected $primaryKey = 'id';
     protected $fillable = [
@@ -38,8 +40,8 @@ class Mobil extends Model
         return 'string';
     }
 
-    public function sewa()
+    public function sewa(): HasOne
     {
-        return $this->belongsTo(Sewa::class);
+        return $this->hasOne(Sewa::class);
     }
 }

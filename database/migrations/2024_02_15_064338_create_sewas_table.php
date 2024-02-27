@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('sewas', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('id_user');
+            $table->foreignUuid('users_id')->constrained();
+            $table->foreignUuid('mobils_id')->constrained();
             $table->string("tanggal_mulai");
             $table->string("tanggal_selesai");
-            $table->uuid('id_mobil');
             $table->string("harga_sewa");
             $table->timestamps();
 
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('id_mobil')->references('id')->on('mobils')->onDelete('cascade');
+            // $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+            // $table->foreign('id_mobil')->references('id')->on('mobils')->onDelete('cascade');
         });
     }
 

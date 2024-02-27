@@ -55,8 +55,8 @@ class AdminController extends Controller
      */
     public function penyewaan()
     {
-        $sewas = Sewa::join('mobils', 'sewas.id_mobil', '=', 'mobils.id')
-            ->join('users', 'sewas.id_user', '=', 'users.id')
+        $sewas = Sewa::join('mobils', 'sewas.mobils_id', '=', 'mobils.id')
+            ->join('users', 'sewas.users_id', '=', 'users.id')
             ->select('sewas.*', 'mobils.*', 'users.*')
             ->where('status', 'disewa')
             ->get();
@@ -70,8 +70,8 @@ class AdminController extends Controller
     public function pengembalian()
     {
         $pengembalians = Pengembalian::join('sewas', 'pengembalians.id_sewa', '=', 'sewas.id')
-            ->join('users', 'sewas.id_user', '=', 'users.id')
-            ->join('mobils', 'sewas.id_mobil', '=', 'mobils.id')
+            ->join('users', 'sewas.users_id', '=', 'users.id')
+            ->join('mobils', 'sewas.mobils_id', '=', 'mobils.id')
             ->get(['pengembalians.*', 'sewas.*', 'users.*', 'mobils.*']);
 
         return view('admin.pengembalian', compact('pengembalians'));

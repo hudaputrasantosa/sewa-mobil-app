@@ -43,7 +43,6 @@ class UserController extends Controller
     public function tampilSewa(string $id_mobil)
     {
         $mobil = Mobil::find($id_mobil);
-        // @dd($mobil);
         return view('user.sewa', compact('mobil'));
     }
 
@@ -67,10 +66,10 @@ class UserController extends Controller
         $harga_sewa = $request->tarif_sewa * ($endCarbon->diffInDays($startCarbon) + 1);
 
         $sewa = new Sewa();
-        $sewa->id_user = Auth::user()->id;
+        $sewa->users_id = Auth::user()->id;
         $sewa->tanggal_mulai = $request->tanggal_mulai;
         $sewa->tanggal_selesai = $request->tanggal_selesai;
-        $sewa->id_mobil = $request->id_mobil;
+        $sewa->mobils_id = $request->id_mobil;
         $sewa->harga_sewa = $harga_sewa;
         $sewa->save();
         Mobil::where('id', $request->id_mobil)->update(['status' => 'disewa']);
@@ -90,8 +89,8 @@ class UserController extends Controller
 
     public function sewaBerlangsung()
     {
-        $sewas = Sewa::join('mobils', 'sewas.id_mobil', '=', 'mobils.id')
-            ->where('id_user', Auth::user()->id)
+        $sewas = Sewa::join('mobils', 'sewas.mobils_id', '=', 'mobils.id')
+            ->where('users_id', Auth::user()->id)
             ->where('status', 'disewa')
             ->get(['sewas.*', 'mobils.merek', 'mobils.plat', 'mobils.status']);
 
@@ -101,8 +100,8 @@ class UserController extends Controller
 
     public function pengembalian(Request $request)
     {
-        $sewa = Sewa::join('mobils', 'sewas.id_mobil', '=', 'mobils.id')
-            ->where('id_user', Auth::user()->id)
+        $sewa = Sewa::join('mobils', 'sewas.mobils_id', '=', 'mobils.id')
+            ->where('users_id', Auth::user()->id)
             ->where('plat', $request->plat)
             ->first(['sewas.*', 'mobils.plat', 'mobils.status']);
 
